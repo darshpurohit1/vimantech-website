@@ -377,6 +377,27 @@ nav ul {
             }
         /* Responsive Design */
         @media (max-width: 768px) {
+            /* Header and Navigation adjustments */
+    header .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+       .nav-links li {
+        margin: 5px 0;
+    }
+    
+    .nav-links li a {
+        display: block;
+        padding: 8px 0;
+    }
 
             .hero h1 {
                 font-size: 2.5rem;
@@ -389,28 +410,17 @@ nav ul {
                 display: block;
                 padding: 10px 0;
             }
-            .products-grid{
-                flex-direction: column;
-                align-items: center;
-            }
-              .product-card {
+            .products-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
         width: 90%;
         margin: 0;
         margin-bottom: 20px;
     }
-    /* Testimonials, Features, and Videos section */
-    #testimonials-grid, .features-grid, .videos-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .testimonial-card, .feature-card {
-        width: 100%;
-    }
-
-    .animated {
-        opacity: 1; /* Hide animations on mobile for better performance */
-        transform: none;
-    }
+            
 
             /* Order Form Section Styles */
 .order-form-section {
