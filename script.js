@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('price', priceValue);
 
             try {
-                const response = await fetch('http://localhost:3000/send-email', {
+                const response = await fetch('https://vimantech-backend.onrender.com/send-email', {
                     method: 'POST',
                     body: formData
                 });
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             
             try {
-                const response = await fetch('http://localhost:3000/send-quote', {
+                const response = await fetch('https://vimantech-backend.onrender.com/send-email', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
