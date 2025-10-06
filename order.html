@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vimantech - Custom Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">Vimantech</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#services">Our Services</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="features.html">Key Features</a></li>
+                    <li><a href="videos.html"> Videos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <section class="order-form-section">
+            <div class="container">
+                <h2>Place Your Custom Order</h2>
+                <form id="order-form">
+                    <div class="form-group" enctype ="multipart/form-data">
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cycle-image">Upload Your Cycle Image:</label>
+                        <input type="file" id="cycle-image" name="image" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="range">Select Your Range (km):</label>
+                        <select id="range" name="range" required>
+                            <option value="">Select Range</option>
+                            <option value="40">40 km</option>
+                            <option value="60">60 km</option>
+                            <option value="80">80 km</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="motor-type">Motor Type:</label>
+                        <select id="motor-type" name="motor" required>
+                            <option value="">Select Motor</option>
+                            <option value="hub">Hub Motor</option>
+                            <option value="bldc">BLDC Motor</option>
+                        </select>
+                    </div>
+                    <div class="form-group price-display">
+                        <p>Estimated Cost: <span id="estimated-price">₹0</span></p>
+                    </div>
+                    <button type="submit" class="submit-btn">Get Order</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>
