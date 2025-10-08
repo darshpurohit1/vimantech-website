@@ -14,10 +14,10 @@ const upload = multer({ dest: 'uploads/' });
 const transporter = nodemailer.createTransport({
     host: 'smtp.postmarkapp.com',
     port: 587,
-    secure: false, // TLS
+    secure: false,
     auth: {
-        user: '0fc61da0-637f-4c82-98c7-8157613b9eac',
-        pass: '0fc61da0-637f-4c82-98c7-8157613b9eac'
+        user: process.env.AUTH_USER,
+        pass: process.env.AUTH_PASS
     }
 });
     // API endpoint to handle "Get a Quote" requests
