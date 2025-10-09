@@ -26,7 +26,7 @@ app.post('/send-quote', (req, res) => {
     // Email 1: To the business (Quote details)
     const mailOptionsToMe = {
         from: 'customercare@vimantech.in.net',
-        to: 'chirayupurohit18@gmail.com',
+        to: 'customercare@vimantech.in.net',
         subject: `New Quote Request from ${name}`,
         html: `
             <h1>New Quote Request Received!</h1>
