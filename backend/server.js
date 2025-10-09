@@ -25,7 +25,7 @@ app.post('/send-quote', (req, res) => {
 
     // Email 1: To the business (Quote details)
     const mailOptionsToMe = {
-        from: 'customercare@vimantech.in.net',
+        from: 'notifications@vimantech.in.net',
         to: 'customercare@vimantech.in.net',
         subject: `New Quote Request from ${name}`,
         html: `
@@ -70,7 +70,7 @@ app.post('/send-email', upload.single('image'), (req, res) => {
 
     // Email 1: To the business (Order details and image)
     const mailOptionsToMe = {
-        from: 'customercare@vimantech.in.net',
+        from: 'notifications@vimantech.in.net',
         to: 'customercare@vimantech.in.net',
         subject: `New Order: ${name}`,
         html: `
