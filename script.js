@@ -76,29 +76,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+      // Get a Quote form logic
+if (document.getElementById('quote-form')) {
+    const form = document.getElementById('quote-form');
 
-    // Get a Quote form logic
-const form = document.getElementById('quote-form');
-
-if (form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Directly get values from the form inputs
+        const formData = new FormData(form);
         const data = {
-            name: form.querySelector('[name="name"]').value,
-            email: form.querySelector('[name="email"]').value,
-            phone: form.querySelector('[name="phone"]').value,
-            message: form.querySelector('[name="needs"]').value,
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            message: formData.get('needs'),
         };
-        
+
         try {
             const response = await fetch('https://api.vimantech.in.net/send-quote', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data) // Now 'data' is a valid JSON object
+                body: JSON.stringify(data)
             });
 
             const result = await response.text();
@@ -114,6 +113,7 @@ if (form) {
             alert('Form submission failed. Please check your network and try again.');
         }
     });
-}
+  }
+    
     }
 );
