@@ -69,9 +69,10 @@ app.post('/send-email', upload.single('image'), (req, res) => {
     const uploadedFile = req.file;
 
     // Email 1: To the business (Order details and image)
+    
     const mailOptionsToMe = {
         from: 'customercare@vimantech.in.net',
-        to: 'purohitdarsh64@gmail.com',
+        to: 'darshpurohit1812@gmail.com',
         subject: `New Order: ${name}`,
         html: `
             <h1>New Custom Order Received!</h1>
@@ -88,6 +89,7 @@ app.post('/send-email', upload.single('image'), (req, res) => {
             }
         ],
     };
+      
 
     // Email 2: To the customer (Confirmation)
     const mailOptionsToCustomer = {
