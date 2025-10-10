@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rangeSelect = document.getElementById('range');
         const motorSelect = document.getElementById('motor-type');
         const priceDisplay = document.getElementById('estimated-price');
-        const imageInput = document.getElementById('image-upload');
+        const imageInput = document.getElementById('cycle-image');
         
         // Price data
         const prices = {
