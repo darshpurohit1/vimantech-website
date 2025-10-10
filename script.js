@@ -88,7 +88,7 @@ if (document.getElementById('quote-form')) {
             name: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
-            message: formData.get('message'),
+            message: formData.get('needs'),
         };
 
         try {
