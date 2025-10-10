@@ -77,42 +77,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // "Get a Quote" form logic
-    if (document.getElementById('quote-form')) {
-        const form = document.getElementById('quote-form');
+    // Get a Quote form logic
+const form = document.getElementById('quote-form');
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+if (form) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-            const formData = new FormData(form);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                needs: formData.get('message'),
-            };
-            
-            try {
-                const response = await fetch('https://api.vimantech.in.net/send-quote', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
+        // Directly get values from the form inputs
+        const data = {
+            name: form.querySelector('[name="name"]').value,
+            email: form.querySelector('[name="email"]').value,
+            phone: form.querySelector('[name="phone"]').value,
+            message: form.querySelector('[name="message"]').value,
+        };
+        
+        try {
+            const response = await fetch('https://api.vimantech.in.net/send-quote', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) // Now 'data' is a valid JSON object
+            });
 
-                const result = await response.text();
-                
-                if (response.ok) {
-                    alert('Quote request sent successfully!');
-                    form.reset();
-                } else {
-                    alert('An error occurred. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Form submission failed. Please check your network and try again.');
+            const result = await response.text();
+
+            if (response.ok) {
+                alert('Quote request sent successfully!');
+                form.reset();
+            } else {
+                alert('An error occurred. Please try again.');
             }
-        });
+        } catch (error) {
+            console.error('Form submission failed:', error);
+            alert('Form submission failed. Please check your network and try again.');
+        }
+    });
+}
     }
-});
+);
