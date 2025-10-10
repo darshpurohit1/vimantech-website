@@ -21,7 +21,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // API endpoint to handle "Get a Quote" requests
 app.post('/send-quote', (req, res) => {
-    const { name, email, phone, message } = req.body;
+    const { name, email, phone, needs } = req.body;
 
     // Email 1: To the business (Quote details)
     const mailOptionsToMe = {
@@ -33,7 +33,7 @@ app.post('/send-quote', (req, res) => {
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Message:</strong> ${message}</p>
+            <p><strong>Message:</strong> ${needs}</p>
         `,
     };
 
