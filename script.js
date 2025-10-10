@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: formData.get('name'),
                 email: formData.get('email'),
                 phone: formData.get('phone'),
-                needs: formData.get('needs'),
+                needs: formData.get('message'),
             };
             
             try {
