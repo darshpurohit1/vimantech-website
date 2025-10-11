@@ -73,7 +73,7 @@ app.post('/send-email', upload.single('image'), (req, res) => {
     
     const mailOptionsToMe = {
         from: 'customercare@vimantech.in.net',
-        to: 'darshpurohit1812@gmail.com',
+        to: 'purohitdarsh64@gmail.com',
         subject: `New Order: ${name}`,
         html: `
             <h1>New Custom Order Received!</h1>
@@ -86,7 +86,7 @@ app.post('/send-email', upload.single('image'), (req, res) => {
         attachments: [
             {
                 filename: uploadedFile.originalname,
-                content:fs.createReadStream(uploadedFile.path),
+                content:fs.readFileSync(uploadedFile.path),
             }
         ],
     };
