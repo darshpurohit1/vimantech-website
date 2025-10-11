@@ -2,6 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const multer = require('multer');
 const cors = require('cors');
+const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -85,7 +86,7 @@ app.post('/send-email', upload.single('image'), (req, res) => {
         attachments: [
             {
                 filename: uploadedFile.originalname,
-                path: uploadedFile.path,
+                content:fs.createReadStream(uploadedFile.path),
             }
         ],
     };
