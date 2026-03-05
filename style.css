@@ -481,7 +481,32 @@ nav ul {
     color: #ff9900;
     margin-bottom: 40px;
 }
+/* Hero Image Styling */
+.hero-image-box {
+    text-align: center;
+    margin-bottom: 30px; /* Text se thodi doori banane ke liye */
+}
 
+.hero-image-box img {
+    width: 100%;
+    max-width: 550px; /* Image ka size yahan se control karein */
+    height: auto;
+    border-radius: 15px; /* Kinare thode round karne ke liye */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sunder shadow ke liye */
+    transition: transform 0.3s ease;
+}
+
+/* Jab mouse image par jaye toh thoda zoom ho */
+.hero-image-box img:hover {
+    transform: scale(1.03);
+}
+
+/* Mobile ke liye responsive setup */
+@media (max-width: 768px) {
+    .hero-image-box img {
+        max-width: 90%; /* Mobile screen par thodi choti dikhegi */
+    }
+}
 
            
         }
