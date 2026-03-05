@@ -489,7 +489,7 @@ nav ul {
 
 .hero-image-box img {
     width: 100%;
-    max-width: 550px; /* Image ka size yahan se control karein */
+    max-width: 450px; /* Image ka size yahan se control karein */
     height: auto;
     border-radius: 15px; /* Kinare thode round karne ke liye */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sunder shadow ke liye */
