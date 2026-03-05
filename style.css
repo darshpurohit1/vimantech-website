@@ -481,30 +481,39 @@ nav ul {
     color: #ff9900;
     margin-bottom: 40px;
 }
-/* Hero Image Styling */
+/* Hero Image Styling - Dono Desktop aur Mobile ke liye */
 .hero-image-box {
     text-align: center;
-    margin-bottom: 30px; /* Text se thodi doori banane ke liye */
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .hero-image-box img {
-    width: 100%;
-    max-width: 450px; /* Image ka size yahan se control karein */
-    height: auto;
-    border-radius: 15px; /* Kinare thode round karne ke liye */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sunder shadow ke liye */
+    width: 90%;          /* Mobile par side se thodi jagah chhodega */
+    max-width: 400px;    /* Desktop par isse bada nahi hoga, ekdum perfect size */
+    height: auto;        /* Photo khichegi nahi */
+    border-radius: 15px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    display: block;      /* Alignment sahi karne ke liye */
+    margin: 0 auto;
     transition: transform 0.3s ease;
 }
 
-/* Jab mouse image par jaye toh thoda zoom ho */
+/* Mouse le jaane par halka sa zoom */
 .hero-image-box img:hover {
     transform: scale(1.03);
 }
 
-/* Mobile ke liye responsive setup */
+/* Mobile responsive extra safety */
 @media (max-width: 768px) {
     .hero-image-box img {
-        max-width: 90%; /* Mobile screen par thodi choti dikhegi */
+        max-width: 350px; /* Choti screen par size thoda aur kam kar diya */
+        margin-top: 15px;
+    }
+    
+    .hero {
+        padding-top: 80px; /* Navbar ke piche text na dabe */
     }
 }
 
