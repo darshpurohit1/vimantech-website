@@ -522,7 +522,7 @@ nav ul {
 }
 
 /* --- MOBILE RESPONSIVENESS (DO NOT REMOVE) --- */
-@media (max-width: 991px) {
+@media (max-width: 768px) {
     .hero-wrapper {
         flex-direction: column !important; /* Mobile par wapas upar-niche */
         text-align: center;
@@ -536,7 +536,18 @@ nav ul {
 
     .hero-image-box {
         order: 1; /* Cycle upar */
+        width: 100%;
+        max-width: 100%;
+        height: 40vh;
     }
+      .swiper-wrapper,
+      .swiper-slide{
+        height: 40vh;
+      }
+        .swiper-slide img{
+            object-fit: contain;
+            background: #000;
+        }
 
     .hero-text-box h1 {
         font-size: 2.5rem;
