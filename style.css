@@ -148,15 +148,15 @@
 }
    .swiper-wrapper,
    .swiper-slide{
-    width: 90%;
-    height: 120%;
+    width: 100%;
+    height: 100%;
    }
 
   .swiper-slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: center;
+    object-fit: cover;
+    object-position: center top;
     display: block;
     
 }
@@ -523,37 +523,70 @@ nav ul {
 
 /* --- MOBILE RESPONSIVENESS (DO NOT REMOVE) --- */
 @media (max-width: 768px) {
-    .hero-wrapper {
-        flex-direction: column !important; /* Mobile par wapas upar-niche */
-        text-align: center;
-        padding-top: 60px;
-    }
-
-    .hero-text-box {
-        text-align: center;
-        order: 2; /* Text niche */
-    }
-
+ 
     .hero-image-box {
-        order: 1; /* Cycle upar */
         width: 100%;
         max-width: 100%;
-        height: 40vh;
+        height: 45vh;
+        overflow: hidden;
     }
-      .swiper-wrapper,
-      .swiper-slide{
-        height: 40vh;
-      }
-        .swiper-slide img{
-            object-fit: contain;
-            background: #000;
-        }
-
-    .hero-text-box h1 {
-        font-size: 2.5rem;
-    }
-}
  
-
-           
-        }
+    .swiper-wrapper,
+    .swiper-slide {
+        width: 100% !important;
+        height: 45vh !important;
+    }
+ 
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+    }
+ 
+    .hero {
+        padding-top: 70px;
+        min-height: auto;
+    }
+ 
+    .hero-text-box {
+        width: 95%;
+        margin: 0 auto 40px auto;
+        text-align: center;
+    }
+ 
+    .hero-text-box h1 {
+        font-size: 2rem;
+    }
+ 
+    .hero-text-box p {
+        font-size: 0.95rem;
+    }
+ 
+    h2 {
+        font-size: 1.8rem;
+    }
+ 
+    .products-grid,
+    .features-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+ 
+    .order-form-section {
+        margin-top: 100px;
+        padding: 40px 20px;
+    }
+ 
+    #order-form {
+        padding: 20px;
+    }
+ 
+    nav ul {
+        gap: 10px;
+    }
+ 
+}
+}
