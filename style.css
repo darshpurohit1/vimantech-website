@@ -553,42 +553,7 @@ nav ul {
         font-size: 2.5rem;
     }
 }
- /* --- MOBILE MENU SWIPE FIX --- */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column !important; /* Logo upar, links niche */
-        align-items: center;
-    }
-
-    nav {
-        width: 100%;
-        margin-top: 15px;
-    }
-
-    /* Isse saare links ek line mein swipe honge, hide nahi honge */
-    .nav-links {
-        display: flex !important;
-        flex-direction: row !important;
-        overflow-x: auto; /* Side swipe enable karega */
-        white-space: nowrap;
-        gap: 15px;
-        padding: 10px 0;
-        scrollbar-width: none; /* Scrollbar hatane ke liye */
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-links::-webkit-scrollbar {
-        display: none; /* Chrome/Safari mein scrollbar hide */
-    }
-
-    .nav-links li a {
-        font-size: 14px;
-        padding: 8px 12px;
-        background: rgba(255, 140, 0, 0.1); /* Halka orange touch */
-        border: 1px solid rgba(255, 140, 0, 0.3);
-        border-radius: 20px;
-    }
-}
+ 
 
            
         }
