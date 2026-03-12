@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Vimantech - Convert Your Cycle into Electric</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
 </head>
 <body>
@@ -25,10 +27,29 @@
         </nav>
     </header>
 
-    <section class="hero">
-    <div class="hero-image-box"><img src="images/hero.png"alt="Vimantech E-bike"class="animate"></div>
-    <p class="animate">At Vimantech, we specialize in transforming your manual cycle into an electric cycle.</p>
-    <a href="#services" class="cta-button animate">Explore Our Services</a>
+    
+
+        <section class="hero">
+    <div class="container hero-wrapper">
+        
+        <div class="hero-image-box swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="images/not1.png" alt="Cycle 1">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/not.png" alt="Cycle 2">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="hero-text-box">
+            <p class="animate"></p>
+            <a href="#services" class="cta-button animate">Explore Our Services</a>
+        </div>
+
+    </div>
 </section>
 
     <section id="about" class="about-section">
@@ -36,7 +57,7 @@
         <h2 class="animate">About Vimantech</h2>
         <p class="animate">Vimantech is dedicated to revolutionizing urban mobility by combining cutting-edge technology with sustainable solutions.</p>
     </div>
-</section>
+    </section>
 
     <section id="services" class="products-section">
     <div class="container">
@@ -99,6 +120,19 @@
     <script src="script.js">
 
     </script>
+    <script>
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+  });
+</script>
 
 </body>
 </html>

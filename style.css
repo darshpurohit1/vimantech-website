@@ -128,33 +128,64 @@
 }
 
         /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding-top: 60px; /* Header height ke liye */
-        }
+/* --- VIMANTECH VERTICAL STACK LAYOUT --- */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 80px; /* Isse sirf navbar ki jagah chodein */
+    background: #000;
+    width: 100%;
+    min-height: 100vh;
+}
+   .hero-image-box {
+    width: 100%;
+    max-width: 100%; /* Desktop ke liye ek limit */
+    height: 85vh; /* Iska matlab image screen ki 70% height se zyada badi nahi hogi */
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+   .swiper-wrapper,
+   .swiper-slide{
+    width: 90%;
+    height: 120%;
+   }
 
-        .hero h1 {
-    font-size: 3.5rem;
-    margin: 0;
-    color: transparent;
-    background: linear-gradient(90deg, #00A9FF, #592693); /* Naya aur final gradient */
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: gradient-animation 4s infinite alternate;
+  .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    
 }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-        }
+
+/* 2. Dots (Pagination) - Inhe image ke thik niche rakha hai */
+.swiper-pagination {
+    position: relative !important;
+    bottom: 0 !important;
+    margin: 20px 0 40px 0 !important;
+}
+
+/* 3. Text & Explore Button Section */
+.hero-text-box {
+    width: 90%;
+    max-width: 800px;
+    margin:0 auto 80px auto; /* Niche wale section se doori */
+    text-align: center;
+}
+
+.hero-text-box p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+
+}
 
         .cta-button {
+            display: inline-block;
             background-color: #ff9900;
             color: #111;
             padding: 12px 30px;
@@ -481,37 +512,71 @@ nav ul {
     color: #ff9900;
     margin-bottom: 40px;
 }
-/* Hero section ka alignment sahi karne ke liye */
-.section.hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 100px 20px 50px 20px; /* Navbar se doori banane ke liye */
-    text-align: center;
+
+
+/* Cycle Floating Animation */
+@keyframes floatCycle {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
 }
 
-/* Image container ko limit mein rakhne ke liye */
-.hero-image-box {
-    width: 100%;
-    max-width: 500px; /* Isse bada container nahi hoga */
-    margin: 20px auto; /* Upar-niche se gap aur center alignment */
-    overflow: hidden; /* Image bahar na nikle */
-}
+/* --- MOBILE RESPONSIVENESS (DO NOT REMOVE) --- */
+@media (max-width: 991px) {
+    .hero-wrapper {
+        flex-direction: column !important; /* Mobile par wapas upar-niche */
+        text-align: center;
+        padding-top: 60px;
+    }
 
-.hero-image-box img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
+    .hero-text-box {
+        text-align: center;
+        order: 2; /* Text niche */
+    }
 
-/* Content (text) ko image ke niche dhakelne ke liye */
-.hero p, .hero .cta-button {
-    position: relative;
-    z-index: 1;
-    margin-top: 15px;
+    .hero-image-box {
+        order: 1; /* Cycle upar */
+    }
+
+    .hero-text-box h1 {
+        font-size: 2.5rem;
+    }
+}
+ /* --- MOBILE MENU SWIPE FIX --- */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column !important; /* Logo upar, links niche */
+        align-items: center;
+    }
+
+    nav {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    /* Isse saare links ek line mein swipe honge, hide nahi honge */
+    .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto; /* Side swipe enable karega */
+        white-space: nowrap;
+        gap: 15px;
+        padding: 10px 0;
+        scrollbar-width: none; /* Scrollbar hatane ke liye */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none; /* Chrome/Safari mein scrollbar hide */
+    }
+
+    .nav-links li a {
+        font-size: 14px;
+        padding: 8px 12px;
+        background: rgba(255, 140, 0, 0.1); /* Halka orange touch */
+        border: 1px solid rgba(255, 140, 0, 0.3);
+        border-radius: 20px;
+    }
 }
 
            
