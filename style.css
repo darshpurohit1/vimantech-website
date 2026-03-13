@@ -639,3 +639,7 @@ nav ul {
 }
 
 }
+/* Har section ko navbar ki height se neeche karo */
+section {
+    scroll-margin-top: 80px;
+}
