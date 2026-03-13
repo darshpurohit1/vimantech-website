@@ -117,9 +117,17 @@ if (document.getElementById('quote-form')) {
     
     }
 );
-    const hamburger = document.getElementById('hamburger');
+    // Hamburger Menu
+const hamburger = document.getElementById('hamburger');
 const navLinks = document.querySelector('nav ul');
 
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('open');
+});
+
+// Link click karne pe menu band ho
+navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+    });
 });
