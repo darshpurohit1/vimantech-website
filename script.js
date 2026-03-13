@@ -117,3 +117,9 @@ if (document.getElementById('quote-form')) {
     
     }
 );
+    const hamburger = document.getElementById('hamburger');
+const navLinks = document.querySelector('nav ul');
+
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+});

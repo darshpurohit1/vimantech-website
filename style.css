@@ -66,6 +66,9 @@
             align-items: center;
             color: #b9196e;
         }
+          .hamburger{
+            display: none;
+          }
 
         /* Logo Par Shandaar Effect */
 .logo {
@@ -144,9 +147,14 @@
     max-width: 100%; /* Desktop ke liye ek limit */
     height: 85vh; /* Iska matlab image screen ki 70% height se zyada badi nahi hogi */
     margin-bottom: 20px;
-    overflow: hidden;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
 }
-   .swiper-wrapper,
+   .swiper-wrapper{
+    flex: 1;
+    height: auto;
+   }
    .swiper-slide{
     width: 100%;
     height: 100%;
@@ -155,7 +163,7 @@
   .swiper-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center top;
     display: block;
     
@@ -164,10 +172,20 @@
 
 /* 2. Dots (Pagination) - Inhe image ke thik niche rakha hai */
 .swiper-pagination {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 5px 0 !important;
+    margin-top: 10px !important;
     position: relative !important;
-    bottom: 0 !important;
-    margin: 20px 0 40px 0 !important;
 }
+  .swiper-pagination-bullet{
+    background: #ff9900!important;
+    opacity: 1 !important;
+    width: 12px !important;
+    height: 12px !important;
+  }
 
 /* 3. Text & Explore Button Section */
 .hero-text-box {
@@ -589,4 +607,35 @@ nav ul {
     }
  
 }
+.hamburger {
+    display: none!important;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block !important;
+    }
+
+    nav ul {
+        display: none !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 60px !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: rgba(0,0,0,0.95) !important;
+        padding: 20px !important;
+        gap: 15px !important;
+    }
+
+    nav ul.open {
+        display: flex !important;
+    }
+}
+
 }
