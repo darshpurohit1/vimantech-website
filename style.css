@@ -72,18 +72,17 @@
 
         /* Logo Par Shandaar Effect */
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #fff;
     text-decoration: none;
     transition: all 0.3s ease;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    animation: pulse 2s infinite; /* Slow pulse effect */
+    animation: pulse 2s infinite;
+}
+
+.logo svg {
+    width: 250px;
+    height: 60px;
 }
 
 .logo:hover {
-    color: #ff9900;
-    text-shadow: 0 0 15px rgba(255, 153, 0, 0.8);
     transform: scale(1.05);
 }
 
@@ -91,6 +90,13 @@
     0% { transform: scale(1); }
     50% { transform: scale(1.02); }
     100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+    .logo svg {
+        width: 150px;
+        height: 40px;
+    }
 }
         /* Navigation Links ka final style */
 .nav-links li a{
