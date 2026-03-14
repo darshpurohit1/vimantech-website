@@ -1,7 +1,7 @@
- body {
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap'); body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family:'Rajdhani', sans-serif;
             background-color: #0d0d0d;
             color: #f0f0f0;
             line-height: 1.6;
@@ -231,9 +231,13 @@
         }
 
         h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #FFD700, #8B2FC9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
         .about-section p {
             max-width: 800px;
