@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedMotor = motorSelect.value;
             let price = 0;
     
-            if (selectedRange && selectedMotor) {
-                price = prices[selectedRange][selectedMotor];
+            if (selectedRange ) {
+                price = prices[selectedRange]['hub'];
             }
             priceDisplay.textContent = `₹${price}`;
         }
