@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Price data
         const prices = {
-            '40': { 'hub': 10000, 'bldc': 15000 },
-            '60': { 'hub': 14000, 'bldc': 19000 },
-            '80': { 'hub': 18000, 'bldc': 23000 }
+            '30': { 'hub': 14500,  },
+            '60': { 'hub': 19000,  },
+            '100': { 'hub': 26000,  }
         };
     
         // Calculate and display price
