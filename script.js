@@ -124,4 +124,11 @@ const navLinks = document.querySelector('nav ul');
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('open');
 });
-// Link click karne pe menu band ho
+/// Link click karne pe menu band ho
+const navItems = document.querySelectorAll('nav ul li a');
+
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+    });
+});
