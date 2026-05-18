@@ -3,44 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vimantech - Product Videos</title>
+    <title>Vimantech - Our Products</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .gallery-section {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            text-align: center;
+            background-color: #0d0d0d;
+            min-height: 100vh;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #1a1a1a;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(255, 153, 0, 0.4);
+            border-color: #ff9900;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-item video {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+
+        .gallery-item p {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item img { height: 220px; }
+            .gallery-item video { height: 220px; }
+        }
+    </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">Vimantech</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html#services">Our Services</a></li>
-                    <li><a href="videos.html">Product Videos</a></li>
-                    <li><a href="features.html">Key Features</a></li>
-                    <li><a href="index.html#about">About Us</a></li>
-                    <li><a href="index.html#testimonials">Testimonials</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <svg width="300" height="70" viewBox="0 0 300 70" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="10,5 25,5 50,55 75,5 90,5 50,68" fill="#FF9900"/>
+                    <polygon points="25,5 33,5 50,45 67,5 75,5 50,55" fill="#0d0d0d"/>
+                    <rect x="10" y="5" width="12" height="7" rx="2" fill="#FF9900"/>
+                    <rect x="78" y="5" width="12" height="7" rx="2" fill="#FF9900"/>
+                    <circle cx="50" cy="63" r="4" fill="#8B2FC9"/>
+                    <text x="100" y="32" fill="#FFD700" font-family="Arial" font-size="26" font-weight="700" letter-spacing="2">VIMAN</text>
+                    <text x="100" y="62" fill="#8B2FC9" font-family="Arial" font-size="26" font-weight="700" letter-spacing="2">TECH</text>
+                </svg>
+            </a>
+            <button class="hamburger" id="hamburger">☰</button>
+            <ul id="nav-menu">
+                <li><a href="index.html#services">Our Services</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.html#testimonials">Testimonials</a></li>
+                <li><a href="features.html">Key Features</a></li>
+                <li><a href="videos.html">Our Products</a></li>
+            </ul>
+        </nav>
     </header>
 
     <div class="main-content">
-        <section id="videos" class="videos-section animate">
+        <section class="gallery-section animate">
             <div class="container">
-                <h2 class="animate"></h2>
-                <div class="video-grid">
-                    <div class="video-item animate">
-                        <iframe width="100%" height="auto" src="https://www.youtube.com/embed/CioacXI-HBA?rel=0" 
-                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
-                            clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                        </iframe>
+                <h2>Our Products</h2>
+                <div class="gallery-grid">
+
+                    <div class="gallery-item animate">
+                        <img src="WhatsApp Image 2026-05-18 at 21.12.14.jpeg" alt="Electric Cycle 1">
+                        <p>⚡ Custom Electric Conversion</p>
                     </div>
+
+                    <div class="gallery-item animate">
+                        <img src="WhatsApp Image 2026-05-18 at 21.12.15 (1).jpeg" alt="Electric Cycle 2">
+                        <p>⚡ Mountain E-Cycle Build</p>
+                    </div>
+
+<div class="gallery-item animate">
+    <video width="100%" height="260px" controls style="display:block; object-fit:cover;">
+        <source src="WhatsApp Video 2026-05-18 at 21.12.14.mp4" type="video/mp4">
+    </video>
+    <p>⚡ Classic E-Cycle Conversion</p>
+</div>
+
                 </div>
             </div>
         </section>
     </div>
 
-    <footer class="footer">
+    <footer>
         <div class="container">
             <p>&copy; 2025 Vimantech. All rights reserved.</p>
         </div>
