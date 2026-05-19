@@ -1,12 +1,10 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
 const multer = require('multer');
 const cors = require('cors');
 const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Resend library ko import karo
 const { Resend } = require('resend');
 
 app.use(express.json());
@@ -14,18 +12,25 @@ app.use(cors({
     origin: 'https://vimantech.in.net'
 }));
 
-// Set up Multer for file uploads
 const upload = multer({ dest: 'uploads/' });
-
-// Create a Resend client instead of a Nodemailer transporter
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// API endpoint to handle "Get a Quote" requests
+function deleteFile(filePath) {
+    if (filePath && fs.existsSync(filePath)) {
+        fs.unlink(filePath, (err) => {
+            if (err) console.error('File delete error:', err);
+        });
+    }
+}
+
 app.post('/send-quote', (req, res) => {
     const { name, email, phone, message } = req.body;
 
-    // Email 1: To the business (Quote details)
-    const mailOptionsToMe = {
+    if (!name || !email || !phone || !message) {
+        return res.status(400).json({ message: "All fields are required.", status: "error" });
+    }
+
+    const mailToMe = {
         from: 'customercare@vimantech.in.net',
         to: 'purohitdarsh64@gmail.com',
         subject: `New Quote Request from ${name}`,
@@ -38,40 +43,47 @@ app.post('/send-quote', (req, res) => {
         `,
     };
 
-    // Email 2: To the customer (Confirmation for their quote)
-    const mailOptionsToCustomer = {
+    const mailToCustomer = {
         from: 'customercare@vimantech.in.net',
         to: email,
         subject: `Quote Confirmation from Vimantech`,
         html: `
             <h1>Hello ${name},</h1>
-            <p>Thank you for your quote request! We will review your details and get back to you with a personalized quote.</p>
+            <p>Thank you for your quote request! We will review your details and get back to you shortly.</p>
             <p>The Vimantech Team</p>
         `,
     };
 
-    // Send both emails simultaneously using Resend API
     Promise.all([
-        resend.emails.send(mailOptionsToMe),
-        resend.emails.send(mailOptionsToCustomer)
+        resend.emails.send(mailToMe),
+        resend.emails.send(mailToCustomer)
     ])
-    .then(() => {
+    .then(([result1, result2]) => {
+        if (result1.error || result2.error) {
+            console.error('Resend error:', result1.error || result2.error);
+            return res.status(500).json({ message: "Email sending failed.", status: "error" });
+        }
         res.status(200).json({ message: "Quote request sent successfully.", status: "success" });
     })
     .catch(error => {
-        console.error('Email sending error:', error);
-        res.status(500).json({ message: "An error occurred while sending the quote request.", status: "error" });
+        console.error('Quote email error:', error);
+        res.status(500).json({ message: "An error occurred.", status: "error" });
     });
 });
 
-// API endpoint to handle email sending with file upload
 app.post('/send-email', upload.single('image'), (req, res) => {
     const { name, email, range, motor, price } = req.body;
     const uploadedFile = req.file;
 
-    // Email 1: To the business (Order details and image)
-    
-    const mailOptionsToMe = {
+    if (!name || !email || !range || !motor || !price) {
+        deleteFile(uploadedFile?.path);
+        return res.status(400).json({ message: "All fields are required.", status: "error" });
+    }
+
+    const fileBuffer = fs.readFileSync(uploadedFile.path);
+    const base64Content = fileBuffer.toString('base64');
+
+    const mailToMe = {
         from: 'customercare@vimantech.in.net',
         to: 'purohitdarsh64@gmail.com',
         subject: `New Order: ${name}`,
@@ -86,42 +98,45 @@ app.post('/send-email', upload.single('image'), (req, res) => {
         attachments: [
             {
                 filename: uploadedFile.originalname,
-                content:fs.readFileSync(uploadedFile.path),
+                content: base64Content,
             }
         ],
     };
-      
 
-    // Email 2: To the customer (Confirmation)
-    const mailOptionsToCustomer = {
+    const mailToCustomer = {
         from: 'customercare@vimantech.in.net',
         to: email,
         subject: `Order Confirmation from Vimantech`,
         html: `
             <h1>Hello ${name},</h1>
-            <p>Your order has been received! We will contact you shortly to confirm and process your request.</p>
-            <p>Here are your order details:</p>
+            <p>Your order has been received! We will contact you shortly.</p>
             <ul>
                 <li><strong>Range:</strong> ${range} km</li>
                 <li><strong>Motor:</strong> ${motor}</li>
                 <li><strong>Estimated Cost:</strong> ${price}</li>
             </ul>
-            <p>Thank you, </p>
-            <p>The Vimantech Team</p>
+            <p>Thank you,<br/>The Vimantech Team</p>
         `,
     };
 
-    // Send both emails simultaneously using Resend API
     Promise.all([
-        resend.emails.send(mailOptionsToMe),
-        resend.emails.send(mailOptionsToCustomer)
+        resend.emails.send(mailToMe),
+        resend.emails.send(mailToCustomer)
     ])
-    .then(() => {
+    .then(([result1, result2]) => {
+        deleteFile(uploadedFile.path);
+
+        if (result1.error || result2.error) {
+            console.error('Resend error:', result1.error || result2.error);
+            return res.status(500).json({ message: "Email sending failed.", status: "error" });
+        }
+
         res.status(200).json({ message: "Both emails sent successfully.", status: "success" });
     })
     .catch(error => {
-        console.error('Email sending error:', error);
-        res.status(500).json({ message: "An error occurred while sending the email.", status: "error" });
+        deleteFile(uploadedFile?.path);
+        console.error('Order email error:', error);
+        res.status(500).json({ message: "An error occurred.", status: "error" });
     });
 });
 
