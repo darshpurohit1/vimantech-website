@@ -1,27 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
 
-body {
+/* =========================
+   BASE STYLE & iOS FIXES
+========================= */
+html, body {
     margin: 0;
     padding: 0;
     font-family: 'Rajdhani', sans-serif;
-    background-color: #0d0d0d;
     color: #f0f0f0;
     line-height: 1.6;
     position: relative;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    background-color: #050505; /* Safari के लिए फिक्स बेस कलर */
+    color-scheme: dark; /* iOS को फ़ोर्स करेगा डार्क मोड के लिए */
+    -webkit-font-smoothing: antialiased;
 }
 
-/* =========================
-   PREMIUM GLOBAL BACKGROUND
-========================= */
+/* PREMIUM GLOBAL BACKGROUND */
 body {
     background: linear-gradient(
         180deg,
         #050505 0%,
         #0b0b15 50%,
         #050505 100%
-    );
+    ) !important;
 }
 
 /* Dot grid overlay - ONLY ONE body::before */
@@ -46,7 +49,6 @@ body::before {
 
 /* =========================
    SIDE GLOWS - Separate divs
-   (body::before conflict fix)
 ========================= */
 .glow-left {
     position: fixed;
@@ -54,12 +56,14 @@ body::before {
     height: 500px;
     border-radius: 50%;
     filter: blur(120px);
+    -webkit-filter: blur(120px); /* Safari support */
     z-index: -2;
     pointer-events: none;
     top: 20%;
     left: -180px;
     background: rgba(80, 40, 160, 0.22);
     animation: floatingGlow 8s ease-in-out infinite alternate;
+    will-change: filter, transform; /* Performance fix */
 }
 
 .glow-right {
@@ -68,6 +72,7 @@ body::before {
     height: 500px;
     border-radius: 50%;
     filter: blur(120px);
+    -webkit-filter: blur(120px); /* Safari support */
     z-index: -1;
     pointer-events: none;
     bottom: 10%;
@@ -75,6 +80,7 @@ body::before {
     background: rgba(100, 50, 180, 0.18);
     animation: floatingGlow 8s ease-in-out infinite alternate;
     animation-delay: 4s;
+    will-change: filter, transform; /* Performance fix */
 }
 
 @keyframes floatingGlow {
@@ -88,7 +94,7 @@ body::before {
     100% { transform: translate(-50%, -50%) scale(1); }
 }
 
-/* Magical Corner Glow */
+/* Magical Corner Glow - Fixed Transparent Issue for Safari */
 .corner-glow {
     position: fixed;
     width: 100%;
@@ -106,7 +112,8 @@ body::before {
     left: -200px;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(0, 150, 255, 0.4), transparent 70%);
+    /* iOS Fix: transparent की जगह बेस ब्लैक कलर #050505 यूज़ किया */
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.35), #050505 70%);
 }
 
 .corner-glow::after {
@@ -116,7 +123,8 @@ body::before {
     right: -200px;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(0, 150, 255, 0.4), transparent 70%);
+    /* iOS Fix: transparent की जगह बेस ब्लैक कलर #050505 यूज़ किया */
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.35), #050505 70%);
 }
 
 /* Utility Classes */
@@ -130,7 +138,7 @@ body::before {
    PREMIUM HEADER
 ========================= */
 header {
-    background: rgba(10, 10, 10, 0.45);
+    background: rgba(10, 10, 10, 0.6); /* थोड़ा और डार्क किया Safari रीडेबिलिटी के लिए */
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -151,10 +159,6 @@ nav {
     justify-content: space-between;
     align-items: center;
     color: #e0e0e0;
-}
-
-.hamburger {
-    display: none;
 }
 
 /* Logo */
@@ -331,7 +335,7 @@ nav ul li a:hover {
     line-height: 1.6;
 }
 
-.hero h1 {
+.hero-text-box h1, .hero h1 {
     text-shadow:
         0 0 20px rgba(139, 92, 246, 0.5),
         0 0 40px rgba(255, 153, 0, 0.25);
@@ -397,6 +401,9 @@ nav ul li a:hover {
 }
 
 section {
+    position: relative;
+    z-index: 5;
+    background-color: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     scroll-margin-top: 80px;
 }
@@ -430,7 +437,7 @@ h2 {
 }
 
 .product-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: #11111e !important; /* iOS Safari के लिए सॉलिड प्रीमियम डार्क सूटेबल कलर */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -476,7 +483,7 @@ h2 {
 .features-section {
     padding: 80px 0;
     text-align: center;
-    background-color: #1a1a1a;
+    background-color: #0b0b12;
 }
 
 .features-grid {
@@ -487,7 +494,7 @@ h2 {
 }
 
 .feature-item {
-    background: rgba(255, 255, 255, 0.05);
+    background: #111119;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -523,7 +530,7 @@ h2 {
 .testimonials-section {
     padding: 80px 0;
     text-align: center;
-    background-color: #1a1a1a;
+    background-color: #0b0b12;
 }
 
 .testimonials-grid {
@@ -534,7 +541,7 @@ h2 {
 }
 
 .testimonial-card {
-    background: rgba(255, 255, 255, 0.04);
+    background: #111119;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -612,7 +619,7 @@ h2 {
    CONTACT SECTION
 ========================= */
 .contact-section {
-    background-color: #1a1a1a;
+    background-color: #0b0b12;
 }
 
 .contact-info {
@@ -634,6 +641,8 @@ footer {
     text-align: center;
     padding: 20px 0;
     color: #aaa;
+    position: relative;
+    z-index: 10;
 }
 
 /* =========================
@@ -760,18 +769,14 @@ footer {
     margin-bottom: 40px;
 }
 
-/* =========================
-   CYCLE FLOAT ANIMATION
-========================= */
+/* CYCLE FLOAT ANIMATION */
 @keyframes floatCycle {
     0%   { transform: translateY(0px); }
     50%  { transform: translateY(-15px); }
     100% { transform: translateY(0px); }
 }
 
-/* =========================
-   PREMIUM SCROLLBAR
-========================= */
+/* PREMIUM SCROLLBAR */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -785,9 +790,7 @@ footer {
     border-radius: 20px;
 }
 
-/* =========================
-   HAMBURGER & MOBILE NAV
-========================= */
+/* HAMBURGER & MOBILE NAV */
 .hamburger {
     display: none !important;
     background: none;
@@ -801,7 +804,6 @@ footer {
    MOBILE RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
-
     .hamburger {
         display: block !important;
     }
@@ -897,7 +899,6 @@ footer {
     }
 
     .order-form-section {
-        margin-top: 100px;
         padding: 40px 20px;
     }
 
