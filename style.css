@@ -24,7 +24,7 @@ body {
     );
 }
 
-/* Dot grid overlay */
+/* Dot grid overlay - ONLY ONE body::before */
 body::before {
     content: '';
     position: fixed;
@@ -44,10 +44,11 @@ body::before {
     100% { transform: translate(40px, -40px); }
 }
 
-/* ===== SAFARI FIX - SIDE GLOWS ===== */
-/* LEFT GLOW */
-body::before {
-    content: '';
+/* =========================
+   SIDE GLOWS - Separate divs
+   (body::before conflict fix)
+========================= */
+.glow-left {
     position: fixed;
     width: 500px;
     height: 500px;
@@ -57,15 +58,11 @@ body::before {
     pointer-events: none;
     top: 20%;
     left: -180px;
-    /* FIXED: darker color + lower opacity = same on all browsers */
     background: rgba(80, 40, 160, 0.22);
-    mix-blend-mode: normal;
     animation: floatingGlow 8s ease-in-out infinite alternate;
 }
 
-/* RIGHT GLOW */
-body::after {
-    content: '';
+.glow-right {
     position: fixed;
     width: 500px;
     height: 500px;
@@ -75,9 +72,7 @@ body::after {
     pointer-events: none;
     bottom: 10%;
     right: -180px;
-    /* FIXED: darker color + lower opacity = same on all browsers */
     background: rgba(100, 50, 180, 0.18);
-    mix-blend-mode: normal;
     animation: floatingGlow 8s ease-in-out infinite alternate;
     animation-delay: 4s;
 }
@@ -87,7 +82,6 @@ body::after {
     100% { transform: translateY(-40px) scale(1.12); }
 }
 
-/* Center pulse glow (removed body::after conflict - now handled above) */
 @keyframes pulseGlow {
     0%   { transform: translate(-50%, -50%) scale(1); }
     50%  { transform: translate(-50%, -50%) scale(1.2); }
@@ -417,7 +411,7 @@ h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: none; /* gradient text pe shadow kaam nahi karta */
+    text-shadow: none;
 }
 
 .about-section p {
