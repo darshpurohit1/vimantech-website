@@ -183,3 +183,69 @@ navItems.forEach(item => {
         navLinks.classList.remove('open');
     });
 });
+   // tumhara existing code
+
+
+
+// MAGNETIC BUTTON
+
+const magneticButtons =
+document.querySelectorAll('.cta-button');
+
+magneticButtons.forEach((btn)=>{
+
+    btn.addEventListener('mousemove',(e)=>{
+
+        const rect =
+        btn.getBoundingClientRect();
+
+        const x =
+        e.clientX - rect.left - rect.width/2;
+
+        const y =
+        e.clientY - rect.top - rect.height/2;
+
+        btn.style.transform =
+        `translate(${x*0.2}px,${y*0.2}px)`;
+
+    });
+
+    btn.addEventListener('mouseleave',()=>{
+
+        btn.style.transform =
+        `translate(0px,0px)`;
+
+    });
+
+});
+ const glow = document.createElement('div');
+
+glow.classList.add('cursor-glow');
+
+document.body.appendChild(glow);
+
+document.addEventListener('mousemove',(e)=>{
+
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+
+});
+const header = document.querySelector('header');
+
+window.addEventListener('scroll',()=>{
+
+    if(window.scrollY > 50){
+
+        header.style.background =
+        'rgba(5,5,15,0.75)';
+
+        header.style.backdropFilter =
+        'blur(18px)';
+
+    }else{
+
+        header.style.background =
+        'rgba(10,10,10,0.45)';
+    }
+
+});
