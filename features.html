@@ -5,6 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vimantech - Key Features</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 24px 22px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(249, 115, 22, 0.12);
+            border: 1px solid rgba(249, 115, 22, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #f97316;
+            flex-shrink: 0;
+        }
+
+        .feature-item h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .feature-item p {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .feature-item:last-child:nth-child(3n+1) {
+            grid-column: 2;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .feature-item:last-child:nth-child(3n+1) {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -18,7 +83,7 @@
                     <li><a href="index.html#about">About Us</a></li>
                     <li><a href="index.html#testimonials">Testimonials</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
-                    <li><a href="videos.html#videos"> images</a></li>
+                    <li><a href="videos.html#videos">Gallery</a></li>
                 </ul>
             </nav>
         </div>
@@ -29,27 +94,63 @@
             <div class="container">
                 <h2 class="animate">Key Features</h2>
                 <div class="features-grid">
+
                     <div class="feature-item animate">
-                        <p>GPS for navigation & geofencing</p>
+                        <div class="feature-icon">
+                            <i class="ti ti-map-pin"></i>
+                        </div>
+                        <h3>GPS Navigation</h3>
+                        <p>Real-time tracking with geofence alerts — know where your cycle is, always.</p>
                     </div>
+
                     <div class="feature-item animate">
-                        <p>Temp sensors for battery efficiency</p>
+                        <div class="feature-icon">
+                            <i class="ti ti-temperature"></i>
+                        </div>
+                        <h3>Temperature Sensors</h3>
+                        <p>Monitors battery heat in real-time to maximise efficiency and lifespan.</p>
                     </div>
+
                     <div class="feature-item animate">
-                        <p>Light sensors for auto-lighting</p>
+                        <div class="feature-icon">
+                            <i class="ti ti-sun"></i>
+                        </div>
+                        <h3>Auto Lighting</h3>
+                        <p>Light sensors detect ambient conditions and switch lights on automatically.</p>
                     </div>
+
                     <div class="feature-item animate">
-                        <p>Tilt sensors for balance on uneven terrain</p>
+                        <div class="feature-icon">
+                            <i class="ti ti-adjustments-horizontal"></i>
+                        </div>
+                        <h3>Tilt Sensors</h3>
+                        <p>Detects uneven terrain and helps maintain balance for a smoother ride.</p>
                     </div>
+
                     <div class="feature-item animate">
-                        <p>Smart locks & theft alerts</p>
+                        <div class="feature-icon">
+                            <i class="ti ti-lock"></i>
+                        </div>
+                        <h3>Smart Lock & Theft Alerts</h3>
+                        <p>Instant alerts on your phone if someone tampers with your cycle.</p>
                     </div>
+
                     <div class="feature-item animate">
-                        <p>Voice & gesture control</p>
+                        <div class="feature-icon">
+                            <i class="ti ti-microphone"></i>
+                        </div>
+                        <h3>Voice & Gesture Control</h3>
+                        <p>Hands-free commands for lights, lock, and navigation while riding.</p>
                     </div>
+
                     <div class="feature-item animate">
-                        <p>AI-enhanced collision avoidance system</p>
+                        <div class="feature-icon">
+                            <i class="ti ti-shield-check"></i>
+                        </div>
+                        <h3>AI Collision Avoidance</h3>
+                        <p>AI-powered system detects obstacles and alerts you before it's too late.</p>
                     </div>
+
                 </div>
             </div>
         </section>

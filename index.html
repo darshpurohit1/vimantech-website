@@ -156,7 +156,7 @@
             <li><a href="#contact">Contact</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="features.html">Key Features</a></li>
-            <li><a href="videos.html">images</a></li>
+            <li><a href="videos.html">Gallery</a></li>
         </ul>
     </nav>
 </header>
@@ -210,21 +210,75 @@
     <div class="container">
         <h2 class="animate">What Our Customers Say</h2>
         <div class="testimonials-grid">
+
             <div class="testimonial-card animate">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 <p>"Vimantech's conversion service is a game-changer! My old cycle is now an amazing e-bike. The power and range are incredible."</p>
-                <p><strong>- Manish</strong></p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <strong>Manish</strong>
+                </div>
             </div>
+
             <div class="testimonial-card animate">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 <p>"The team was professional and the process was so smooth. I love my new e-bike, it's perfect for my daily commute."</p>
-                <p><strong>- Bhuvnesh</strong></p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">B</div>
+                    <strong>Bhuvnesh</strong>
+                </div>
             </div>
+
             <div class="testimonial-card animate">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 <p>"I was amazed by the quality of the motor and battery. The cost was reasonable, and the result is better than I expected."</p>
-                <p><strong>- Gautam</strong></p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">G</div>
+                    <strong>Gautam</strong>
+                </div>
             </div>
+
         </div>
     </div>
 </section>
+
+<style>
+.stars {
+    color: #f97316;
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(249, 115, 22, 0.15);
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    color: #f97316;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.testimonial-author strong {
+    color: #ccc;
+    font-size: 14px;
+}
+</style>
 
 <section id="contact" class="contact-section">
     <div class="container">
@@ -238,9 +292,228 @@
     </div>
 </section>
 
-<footer>
-    <p>&copy; 2025 Vimantech. All rights reserved.</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<footer class="footer">
+    <div class="footer-inner">
+
+        <div class="footer-brand">
+            <a href="index.html" class="footer-logo">Vimantech</a>
+            <p class="footer-tagline">Innovate · Build · Electrify</p>
+            <div class="footer-socials">
+                <a href="https://wa.me/917340566612" target="_blank" aria-label="WhatsApp">
+                    <i class="ti ti-brand-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/viman.tech/" target="_blank" aria-label="Instagram">
+                    <i class="ti ti-brand-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <div class="footer-col-title">Quick Links</div>
+            <ul>
+                <li><a href="index.html#services">Our Services</a></li>
+                <li><a href="features.html">Key Features</a></li>
+                <li><a href="index.html#testimonials">Testimonials</a></li>
+                <li><a href="videos.html">Gallery</a></li>
+                <li><a href="order.html">Place Order</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <div class="footer-col-title">Contact Us</div>
+            <ul class="footer-contact">
+                <li>
+                    <i class="ti ti-map-pin"></i>
+                    Udaipur, Rajasthan, India
+                </li>
+                <li>
+                    <i class="ti ti-phone"></i>
+                    <a href="tel:+917340566612">+91 73405 66612</a>
+                </li>
+                <li>
+                    <i class="ti ti-mail"></i>
+                    <a href="mailto:customercare@vimantech.in.net">customercare@vimantech.in.net</a>
+                </li>
+                <li>
+                    <i class="ti ti-clock"></i>
+                    Mon – Sat, 9am – 7pm
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Vimantech. All rights reserved.</p>
+        <p>Made with <i class="ti ti-heart" style="color:#ff9900;font-size:13px;vertical-align:-1px"></i> in Udaipur</p>
+    </div>
 </footer>
+
+<style>
+.footer {
+    background: #000;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 60px 20px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,153,0,0.4), transparent);
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1.2fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #FFD700, #8B2FC9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.footer-tagline {
+    font-size: 0.8rem;
+    color: #444;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-socials a {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 18px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.footer-socials a:hover {
+    border-color: #ff9900;
+    color: #ff9900;
+    background: rgba(255,153,0,0.08);
+}
+
+.footer-col-title {
+    font-size: 0.75rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-col ul li a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.footer-col ul li a:hover {
+    color: #ff9900;
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.footer-contact li i {
+    font-size: 15px;
+    color: #ff9900;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.footer-contact li a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-contact li a:hover {
+    color: #ff9900;
+}
+
+.footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+    }
+}
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="script.js"></script>

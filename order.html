@@ -5,6 +5,184 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vimantech - Custom Order</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+        .order-form-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 0;
+        }
+
+        .order-form-section h2 {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        #order-form {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 40px 36px;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group label i {
+            font-size: 14px;
+            color: #f97316;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select {
+            width: 100%;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 13px 15px;
+            color: #e0e0e0;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group select:focus {
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249,115,22,0.12);
+        }
+
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-color: #111;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+        }
+
+        .file-upload-box {
+            background: #111;
+            border: 1px dashed #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .file-upload-box:hover {
+            border-color: #f97316;
+            background: #150e00;
+        }
+
+        .file-upload-box i {
+            font-size: 28px;
+            color: #f97316;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .file-upload-box span {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .file-upload-box strong {
+            color: #888;
+        }
+
+        .price-display {
+            background: #0d0d0d;
+            border: 1px solid #1f1f1f;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-display p {
+            margin: 0;
+            font-size: 13px;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .price-display #estimated-price {
+            font-size: 22px;
+            font-weight: 600;
+            color: #f97316;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #f97316;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            background: #ea6b0f;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
 </head>
 <body>
 
@@ -18,7 +196,7 @@
                     <li><a href="index.html#contact">Contact</a></li>
                     <li><a href="index.html#testimonials">Testimonials</a></li>
                     <li><a href="features.html">Key Features</a></li>
-                    <li><a href="videos.html"> Videos</a></li>
+                    <li><a href="videos.html">Gallery</a></li>
                 </ul>
             </nav>
         </div>
@@ -28,21 +206,31 @@
         <section class="order-form-section">
             <div class="container">
                 <h2>Place Your Custom Order</h2>
-                <form id="order-form">
-                    <div class="form-group" enctype ="multipart/form-data">
-                        <label for="name">Your Name:</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
+                <form id="order-form" enctype="multipart/form-data">
+
                     <div class="form-group">
-                        <label for="email">Your Email:</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="name"><i class="ti ti-user"></i> Your name</label>
+                        <input type="text" id="name" name="name" placeholder="Rahul Sharma" required>
                     </div>
+
                     <div class="form-group">
-                        <label for="cycle-image">Upload Your Cycle Image:</label>
-                        <input type="file" id="cycle-image" name="image" accept="image/*" required>
+                        <label for="email"><i class="ti ti-mail"></i> Your email</label>
+                        <input type="email" id="email" name="email" placeholder="rahul@example.com" required>
                     </div>
+
                     <div class="form-group">
-                        <label for="range">Select Your Range (km):</label>
+                        <label><i class="ti ti-photo"></i> Upload your cycle image</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="cycle-image" name="image" accept="image/*" required onchange="updateFileName(this)">
+                            <div class="file-upload-box" id="upload-box">
+                                <i class="ti ti-cloud-upload"></i>
+                                <span id="file-name-display"><strong>Click to upload</strong> or drag & drop</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="range"><i class="ti ti-battery-charging"></i> Select your range (km)</label>
                         <select id="range" name="range" required>
                             <option value="">Select Range</option>
                             <option value="30">30 km</option>
@@ -50,22 +238,38 @@
                             <option value="100">100 km</option>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="motor-type">Motor Type:</label>
+                        <label for="motor-type"><i class="ti ti-bolt"></i> Motor type</label>
                         <select id="motor-type" name="motor" required>
                             <option value="">Select Motor</option>
                             <option value="hub">Hub Motor</option>
                         </select>
                     </div>
+
                     <div class="form-group price-display">
-                        <p>Estimated Cost: <span id="estimated-price">₹0</span></p>
+                        <p>Estimated cost</p>
+                        <span id="estimated-price">₹0</span>
                     </div>
-                    <button type="submit" class="submit-btn">Get Order</button>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="ti ti-send"></i> Place My Order
+                    </button>
+
                 </form>
             </div>
         </section>
     </div>
+
     <script src="script.js"></script>
+    <script>
+        function updateFileName(input) {
+            const display = document.getElementById('file-name-display');
+            if (input.files && input.files[0]) {
+                display.innerHTML = '<strong>' + input.files[0].name + '</strong>';
+            }
+        }
+    </script>
 
 </body>
 </html>
