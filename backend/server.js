@@ -163,6 +163,78 @@ app.post('/send-email', upload.single('image'), async (req, res) => {
         res.status(500).json({ message: "An error occurred.", status: "error" });
     }
 });
+      // ═══════════════════════════════════════════════════════
+// ADMIN ROUTES — Yeh sab server.js mein app.listen se
+// UPAR paste kar do
+// ═══════════════════════════════════════════════════════
+
+// Admin auth middleware
+const ADMIN_USER = 'vimantech';
+const ADMIN_PASS = 'viman@admin2025'; // CHANGE KAR!
+
+function adminAuth(req, res, next) {
+    const auth = req.headers['authorization'];
+    if (!auth || !auth.startsWith('Basic ')) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+    const decoded = Buffer.from(auth.split(' ')[1], 'base64').toString();
+    const [user, pass] = decoded.split(':');
+    if (user === ADMIN_USER && pass === ADMIN_PASS) {
+        next();
+    } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+    }
+}
+
+// GET /admin/orders
+app.get('/admin/orders', adminAuth, async (req, res) => {
+    try {
+        const { data, error } = await supabase
+            .from('orders')
+            .select('*')
+            .order('created_at', { ascending: false });
+        if (error) throw error;
+        res.json(data);
+    } catch (e) {
+        console.error('Admin orders error:', e);
+        res.status(500).json({ message: 'Error fetching orders' });
+    }
+});
+
+// GET /admin/quotes
+app.get('/admin/quotes', adminAuth, async (req, res) => {
+    try {
+        const { data, error } = await supabase
+            .from('quotes')
+            .select('*')
+            .order('created_at', { ascending: false });
+        if (error) throw error;
+        res.json(data);
+    } catch (e) {
+        console.error('Admin quotes error:', e);
+        res.status(500).json({ message: 'Error fetching quotes' });
+    }
+});
+
+// GET /admin/stats
+app.get('/admin/stats', adminAuth, async (req, res) => {
+    try {
+        const [o, q, c] = await Promise.all([
+            supabase.from('orders').select('id', { count: 'exact', head: true }),
+            supabase.from('quotes').select('id', { count: 'exact', head: true }),
+            supabase.from('customers').select('id', { count: 'exact', head: true }),
+        ]);
+        res.json({
+            orders:    o.count,
+            quotes:    q.count,
+            customers: c.count,
+        });
+    } catch (e) {
+        console.error('Admin stats error:', e);
+        res.status(500).json({ message: 'Error fetching stats' });
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

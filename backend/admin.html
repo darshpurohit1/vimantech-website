@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vimantech Admin Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        /* ── Login Screen ── */
+        #login-screen {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+        .login-box {
+            background: #13131f;
+            border: 1px solid #2a2a3f;
+            border-radius: 16px;
+            padding: 40px;
+            width: 340px;
+            text-align: center;
+        }
+        .login-box svg { margin-bottom: 20px; }
+        .login-box h2 {
+            color: #FF9900;
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+        .login-box p {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #0a0a0f;
+            border: 1px solid #2a2a3f;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+        .login-box input:focus { border-color: #8B2FC9; }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #8B2FC9, #FF9900);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .login-btn:hover { opacity: 0.88; }
+        .login-error {
+            color: #ff4444;
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* ── Main Layout ── */
+        #main { display: none; }
+
+        header {
+            background: #13131f;
+            border-bottom: 1px solid #2a2a3f;
+            padding: 0 28px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #FF9900;
+        }
+        .header-logo span { color: #8B2FC9; }
+        .logout-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid #2a2a3f;
+            color: #aaa;
+            padding: 7px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .logout-btn:hover { background: #ff444422; color: #ff4444; border-color: #ff4444; }
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 62px);
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 200px;
+            background: #13131f;
+            border-right: 1px solid #2a2a3f;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-item:hover { background: #1a1a2e; color: #ddd; }
+        .sidebar-item.active {
+            background: #1a1a2e;
+            color: #FF9900;
+            border-left-color: #FF9900;
+        }
+        .sidebar-item .icon { font-size: 18px; }
+        .badge {
+            margin-left: auto;
+            background: #8B2FC9;
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+
+        /* ── Content ── */
+        .content {
+            flex: 1;
+            padding: 28px;
+            overflow-y: auto;
+        }
+
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .page-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .page-title span { color: #8B2FC9; }
+        .refresh-btn {
+            background: #1a1a2e;
+            border: 1px solid #2a2a3f;
+            color: #aaa;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .refresh-btn:hover { border-color: #8B2FC9; color: #8B2FC9; }
+
+        /* Stats row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .stat-card {
+            background: #13131f;
+            border: 1px solid #2a2a3f;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-num {
+            font-size: 32px;
+            font-weight: 800;
+            color: #FF9900;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Table */
+        .table-wrap {
+            background: #13131f;
+            border: 1px solid #2a2a3f;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead th {
+            background: #1a1a2e;
+            padding: 13px 16px;
+            text-align: left;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #888;
+            border-bottom: 1px solid #2a2a3f;
+        }
+        tbody tr {
+            border-bottom: 1px solid #1a1a2e;
+            transition: background 0.15s;
+        }
+        tbody tr:hover { background: #1a1a2e; }
+        tbody tr:last-child { border-bottom: none; }
+        td {
+            padding: 13px 16px;
+            font-size: 14px;
+            color: #ccc;
+            vertical-align: top;
+        }
+        td.name { color: #fff; font-weight: 600; }
+        td.msg {
+            max-width: 260px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .tag-motor { background: #1a2f4a; color: #4aabff; }
+        .tag-range { background: #1f2a1a; color: #6dff6d; }
+        .tag-price { background: #2a1f10; color: #ffaa44; }
+
+        /* Loading / Empty */
+        .loading, .empty {
+            text-align: center;
+            padding: 50px 20px;
+            color: #555;
+            font-size: 15px;
+        }
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #333;
+            border-top-color: #8B2FC9;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .date { color: #555; font-size: 12px; }
+
+        /* Dashboard welcome */
+        .welcome {
+            background: linear-gradient(135deg, #1a0a2e, #0a1a2e);
+            border: 1px solid #2a2a3f;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+        .welcome h2 { font-size: 24px; color: #FF9900; margin-bottom: 8px; }
+        .welcome p { color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+    <div class="login-box">
+        <svg width="60" height="60" viewBox="0 0 300 70" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="10,5 25,5 50,55 75,5 90,5 50,68" fill="#FF9900"/>
+            <polygon points="25,5 33,5 50,45 67,5 75,5 50,55" fill="#0d0d0d"/>
+            <circle cx="50" cy="63" r="4" fill="#8B2FC9"/>
+        </svg>
+        <h2>VIMAN<span style="color:#8B2FC9">TECH</span></h2>
+        <p>Admin Panel — Restricted Access</p>
+        <input type="text" id="usr" placeholder="Username" autocomplete="off">
+        <input type="password" id="pwd" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+        <button class="login-btn" onclick="doLogin()">Login</button>
+        <div class="login-error" id="login-err">❌ Invalid credentials</div>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+    <header>
+        <div class="header-logo">
+            <svg width="36" height="36" viewBox="0 0 300 70" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,5 25,5 50,55 75,5 90,5 50,68" fill="#FF9900"/>
+                <polygon points="25,5 33,5 50,45 67,5 75,5 50,55" fill="#0d0d0d"/>
+                <circle cx="50" cy="63" r="4" fill="#8B2FC9"/>
+            </svg>
+            VIMAN<span>TECH</span> &nbsp;Admin
+        </div>
+        <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </header>
+
+    <div class="layout">
+        <div class="sidebar">
+            <div class="sidebar-item active" onclick="showPage('dashboard')">
+                <span class="icon">🏠</span> Dashboard
+            </div>
+            <div class="sidebar-item" onclick="showPage('orders')">
+                <span class="icon">📦</span> Orders
+                <span class="badge" id="orders-badge">0</span>
+            </div>
+            <div class="sidebar-item" onclick="showPage('quotes')">
+                <span class="icon">💬</span> Quotes
+                <span class="badge" id="quotes-badge">0</span>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <!-- DASHBOARD -->
+            <div class="page active" id="page-dashboard">
+                <div class="welcome">
+                    <h2>Welcome Back! 👋</h2>
+                    <p>Vimantech Admin Panel — Manage your orders and quotes</p>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-num" id="stat-orders">—</div>
+                        <div class="stat-label">Total Orders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num" id="stat-quotes">—</div>
+                        <div class="stat-label">Total Quotes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num" id="stat-customers">—</div>
+                        <div class="stat-label">Customers</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ORDERS -->
+            <div class="page" id="page-orders">
+                <div class="page-header">
+                    <div class="page-title">📦 <span>Orders</span></div>
+                    <button class="refresh-btn" onclick="loadOrders()">↻ Refresh</button>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Motor</th>
+                                <th>Range</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-body">
+                            <tr><td colspan="7" class="loading">Loading</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- QUOTES -->
+            <div class="page" id="page-quotes">
+                <div class="page-header">
+                    <div class="page-title">💬 <span>Quotes</span></div>
+                    <button class="refresh-btn" onclick="loadQuotes()">↻ Refresh</button>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="quotes-body">
+                            <tr><td colspan="6" class="loading">Loading</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /content -->
+    </div><!-- /layout -->
+</div><!-- /main -->
+
+<script>
+// ── CONFIG — apna URL aur password yahan set kar ──
+const API_URL  = 'https://vimantech.in.net'; // tera server URL
+const ADMIN_USER = 'vimantech';              // apna username
+const ADMIN_PASS = 'viman@admin2025';        // apna password — CHANGE KAR!
+
+// ── Login ────────────────────────────────────────
+function doLogin() {
+    const u = document.getElementById('usr').value.trim();
+    const p = document.getElementById('pwd').value;
+    if (u === ADMIN_USER && p === ADMIN_PASS) {
+        sessionStorage.setItem('vt_admin', '1');
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main').style.display = 'block';
+        loadAll();
+    } else {
+        document.getElementById('login-err').style.display = 'block';
+    }
+}
+
+function doLogout() {
+    sessionStorage.removeItem('vt_admin');
+    location.reload();
+}
+
+// Auto-login check
+if (sessionStorage.getItem('vt_admin')) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+    loadAll();
+}
+
+// ── Navigation ───────────────────────────────────
+function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+
+    if (name === 'orders') loadOrders();
+    if (name === 'quotes') loadQuotes();
+}
+
+// ── Load All ─────────────────────────────────────
+function loadAll() {
+    loadOrders();
+    loadQuotes();
+    loadStats();
+}
+
+// ── Format Date ──────────────────────────────────
+function fmtDate(str) {
+    if (!str) return '—';
+    const d = new Date(str);
+    return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' })
+         + '<br><span style="color:#444;font-size:11px">'
+         + d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' })
+         + '</span>';
+}
+
+// ── Orders ───────────────────────────────────────
+async function loadOrders() {
+    const tbody = document.getElementById('orders-body');
+    tbody.innerHTML = '<tr><td colspan="7" class="loading">Loading</td></tr>';
+    try {
+        const res  = await fetch(API_URL + '/admin/orders', { headers: adminHeaders() });
+        const data = await res.json();
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan="7" class="empty">No orders yet</td></tr>';
+            return;
+        }
+        document.getElementById('orders-badge').textContent = data.length;
+        tbody.innerHTML = data.map((o, i) => `
+            <tr>
+                <td class="date">${i + 1}</td>
+                <td class="name">${o.name}</td>
+                <td><a href="mailto:${o.customer_email}" style="color:#8B2FC9">${o.customer_email}</a></td>
+                <td><span class="tag tag-motor">${o.motor || '—'}</span></td>
+                <td><span class="tag tag-range">${o.range || '—'} km</span></td>
+                <td><span class="tag tag-price">₹${o.price || '—'}</span></td>
+                <td class="date">${fmtDate(o.created_at)}</td>
+            </tr>
+        `).join('');
+    } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="7" class="empty">❌ Failed to load — check server</td></tr>';
+    }
+}
+
+// ── Quotes ───────────────────────────────────────
+async function loadQuotes() {
+    const tbody = document.getElementById('quotes-body');
+    tbody.innerHTML = '<tr><td colspan="6" class="loading">Loading</td></tr>';
+    try {
+        const res  = await fetch(API_URL + '/admin/quotes', { headers: adminHeaders() });
+        const data = await res.json();
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan="6" class="empty">No quotes yet</td></tr>';
+            return;
+        }
+        document.getElementById('quotes-badge').textContent = data.length;
+        tbody.innerHTML = data.map((q, i) => `
+            <tr>
+                <td class="date">${i + 1}</td>
+                <td class="name">${q.name}</td>
+                <td><a href="mailto:${q.customer_email}" style="color:#8B2FC9">${q.customer_email}</a></td>
+                <td>${q.phone || '—'}</td>
+                <td class="msg">${q.message || '—'}</td>
+                <td class="date">${fmtDate(q.created_at)}</td>
+            </tr>
+        `).join('');
+    } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty">❌ Failed to load — check server</td></tr>';
+    }
+}
+
+// ── Stats ─────────────────────────────────────────
+async function loadStats() {
+    try {
+        const res  = await fetch(API_URL + '/admin/stats', { headers: adminHeaders() });
+        const data = await res.json();
+        document.getElementById('stat-orders').textContent    = data.orders    ?? '—';
+        document.getElementById('stat-quotes').textContent    = data.quotes    ?? '—';
+        document.getElementById('stat-customers').textContent = data.customers ?? '—';
+    } catch (e) { /* silent */ }
+}
+
+// ── Admin Auth Header ─────────────────────────────
+function adminHeaders() {
+    const token = btoa(ADMIN_USER + ':' + ADMIN_PASS);
+    return { 'Authorization': 'Basic ' + token };
+}
+</script>
+</body>
+</html>
